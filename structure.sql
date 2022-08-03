@@ -1,5 +1,5 @@
 CREATE TABLE `cache` (
- `url` int(11) NOT NULL,
+ `url` bigint(20) NOT NULL,
  `json` longtext NOT NULL,
  `time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
  PRIMARY KEY (`url`),
