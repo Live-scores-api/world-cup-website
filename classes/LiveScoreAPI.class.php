@@ -87,7 +87,13 @@ class LiveScoreApi {
 		if ($json) {
 			$data = json_decode($json, true);
 		} else {
-			$json = file_get_contents($url);
+            $arrContextOptions=array(
+                "ssl"=>array(
+                    "verify_peer"=>false,
+                    "verify_peer_name"=>false,
+                ),
+            );
+			$json = file_get_contents($url, false, stream_context_create($arrContextOptions));
 			$data = json_decode($json, true);
 
 			if (!$data['success']) {
