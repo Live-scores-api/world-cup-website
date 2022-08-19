@@ -73,6 +73,12 @@ class LiveScoreApi {
 		return $data['match'];
 	}
 
+	public function getStandings($params = []) {
+		$url = $this->_buildUrl('scores/live.json', $params);
+		$data = $this->_makeRequest($url);
+		return $data['match'];
+	}
+
 	/**
 	 * Makes the actual HTTP request to the Live Score API services
 	 * if possible it will get the data from the cache
