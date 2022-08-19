@@ -19,19 +19,31 @@ $scores = $LiveScoreApi->getLivescores(['competition_id' => COMPETITION_ID]);
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
     </head>
     <body>
-        <div class="container">
+        <div class="container-fluid">
             <div class="row">
+                <div class="col-4">
+                    <h2>Groups</h2>
+                    <hr />
+                </div>
                 <div class="col">
-                    <table class="table">
-                        <?php foreach ($scores as $_match) { ?>
-                            <tr>
-                                <td><?=$_match['time']?></td>
-                                <td><?=$_match['home_name']?></td>
-                                <td><?=$_match['score']?></td>
-                                <td><?=$_match['away_name']?></td>
-                            </tr>
-                        <?php } ?>
-                    </table>
+                    <h2>Live Scores</h2>
+                    <hr />
+                    <?php if ($scores) { ?> 
+                        <table class="table">
+                            <?php foreach ($scores as $_match) { ?>
+                                <tr>
+                                    <td><?=$_match['time']?></td>
+                                    <td><?=$_match['home_name']?></td>
+                                    <td><?=$_match['score']?></td>
+                                    <td><?=$_match['away_name']?></td>
+                                </tr>
+                            <?php } ?>
+                        </table>
+                    <?php } else { ?>
+                        <div class="alert alert-primary" role="alert">
+                            There are no matches currently being played!
+                        </div>
+                    <?php } ?>
                 </div>
             </div>
         </div>
