@@ -74,9 +74,9 @@ class LiveScoreApi {
 	}
 
 	public function getStandings($params = []) {
-		$url = $this->_buildUrl('scores/live.json', $params);
+		$url = $this->_buildUrl('leagues/table.json', $params);
 		$data = $this->_makeRequest($url);
-		return $data['match'];
+		return $data['table'];
 	}
 
 	/**

@@ -9,6 +9,8 @@ require_once 'classes/LiveScoreApi.class.php';
 $LiveScoreApi = new LiveScoreApi(KEY, SECRET, DB_HOST, DB_USER, DB_PASS, DB_NAME);
 $scores = $LiveScoreApi->getLivescores(['competition_id' => COMPETITION_ID]);
 
+$standings = $LiveScoreApi->getStandings(['competition_id' => COMPETITION_ID]);
+
 ?><!doctype html>
 <html lang="en">
     <head>
@@ -24,6 +26,37 @@ $scores = $LiveScoreApi->getLivescores(['competition_id' => COMPETITION_ID]);
                 <div class="col-4">
                     <h2>Groups</h2>
                     <hr />
+                        <?php
+                            $currentGroupId = null;
+                            foreach ($standings as $_standing) {
+                                if ($currentGroupId != $_standing['group_id']) {
+                                    if ($currentGroupId) {
+                                        echo "</table>";
+                                    }
+                                    $currentGroupId = $_standing['group_id'];
+                                ?>
+
+                                    <h4>Group <?=$_standing['group_name']?></h4>
+                                    <table class="table">
+                                        <tr class="table-info">
+                                            <th>#</th>
+                                            <th>Country</th>
+                                            <th>Pts.</th>
+                                            <th>pld.</th>
+                                        </tr>
+                                <?
+                                }
+                        ?>
+
+
+                            <tr>
+                                <td <?php if ($_standing['rank'] < 3) { ?>class="table-success"<?php } ?>><?=$_standing['rank']?>.</td>
+                                <td><?=$_standing['name']?></td>
+                                <td><?=$_standing['points']?></td>
+                                <td><?=$_standing['matches']?></td>
+                            </tr>
+                        <?php } ?>
+                    </table>
                 </div>
                 <div class="col">
                     <h2>Live Scores</h2>
