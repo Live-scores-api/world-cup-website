@@ -79,6 +79,12 @@ class LiveScoreApi {
 		return $data['table'];
 	}
 
+	public function getCompetitionsGroups($params = []) {
+		$url = $this->_buildUrl('competitions/groups.json', $params);
+		$data = $this->_makeRequest($url);
+		return $data;
+	}
+
 	/**
 	 * Makes the actual HTTP request to the Live Score API services
 	 * if possible it will get the data from the cache
